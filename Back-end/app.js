@@ -8,9 +8,9 @@ mongoose.connect('mongodb+srv://Callixtusb:VWvJGQtYHDtw5P81@clusters.cc6ym.mongo
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
+  .catch(() => console.log('Connexion à MongoDB échouée!'));
 
-const app = express(); //...app will be contained in Express
+const app = express(); //...app will be contained in Express.
 
 app.use((req, res, next) => {  //It's a CORS secusity measure that filters the type of requests can be received by the server..
    res.setHeader('Access-Control-Allow-Origin', '*'); //Request from any and all 
