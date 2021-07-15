@@ -3,6 +3,10 @@ const http = require('http');  //..Called up on NodeJS to use the http protocol 
 const app = require('./app.js'); //..App page that is called to communicate with the server.
 app.set('port', process.env.PORT || 3000); //..sThe env. or port that the server will be listening to.
 
+
+
+
+
 const server = http.createServer(app);
 
 // const server = http.createServer((req, res) => {
