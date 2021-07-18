@@ -13,8 +13,8 @@ router.post('/', auth, sauceCtrl.createSauce);          //applying the auth (fro
 router.put('/:id', auth, sauceCtrl.modifySauce);        //applying the auth (from Middleware) to verify the token sent from the front end.    multer, 
 router.delete('/:id', auth, sauceCtrl.deleteSauce);     //applying the auth (from Middleware) to verify the token sent from the front end.
 router.get('/:id', auth, sauceCtrl.getOneSauce);        //applying the auth (from Middleware) to verify the token sent from the front end.
-// router.get('/', auth, sauceCtrl.getAllSauce);           //applying the auth (from Middleware) to verify the token sent from the front end.
 
+// router.get('/', auth, sauceCtrl.getAllSauce);           //applying the auth (from Middleware) to verify the token sent from the front end.
 // router.post('/:id/like', auth, likeCtrl.likeSauce);     //applying the auth (from Middleware) to verify the token sent from the front end.
 
 
