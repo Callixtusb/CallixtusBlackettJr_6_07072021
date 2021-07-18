@@ -6,7 +6,7 @@ const auth = require('../middleware/auth');
 // const multer = require('../middleware/multer-config');
 
 const sauceCtrl = require('../controllers/sauces');
-// const likeCtrl = require('../controllers/like')
+// const likeCtrl = require('../controllers/like');
 
 
 router.post('/', auth, sauceCtrl.createSauce);          //applying the auth (from Middleware) to verify the token sent from the front end.   multer,

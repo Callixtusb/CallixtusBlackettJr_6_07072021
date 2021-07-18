@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');      //import of web token generation modul
 const User = require('../models/User');   //import of user schema model (model de donnees utilisateur)
 
 
-//Function to signup/create a user
+//Function to signup/create a userrr
 exports.signup = (req, res, next) => {   
     bcrypt.hash(req.body.password, 10)   //Function async used to create and encrypt the password
     .then(hash => {                      //Response to send to user

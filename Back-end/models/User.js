@@ -8,4 +8,4 @@ const userSchema = mongoose.Schema({   //contains the schema (modele de donnees)
 
 userSchema.plugin(uniqueValidator); //Ensures that we cannot have many users with the same email. 
 
-module.exports = mongoose.model('User', userSchema); //To make available to other dependent resources, it must be in a state of export..
+module.exports = mongoose.model('User', userSchema); //To nmake available to other dependent resources, it must be in a state of export..

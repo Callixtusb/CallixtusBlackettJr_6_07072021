@@ -3,7 +3,7 @@ const fs = require('fs');
 
 // Checking/contrôle CRUD actions for Sauces and likes & Dislikes - for creation, Update and Delete..
 
-//SAUCES
+//SAUCESSS
 //Creation of new sauce
 exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce);
