@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');         //import of password encryption module
 const jwt = require('jsonwebtoken');      //import of web token generation module
-const User = require('./models/User');   //import of user schema model (model de donnees utilisateur)
+const User = require('../models/User');   //import of user schema model (model de donnees utilisateur)
 
 
 //Function to signup/create a user

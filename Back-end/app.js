@@ -3,8 +3,8 @@ const express = require('express'); //imported from NodeJS after installation - 
 const bodyParser = require('body-parser'); //imported from NodeJS after installation - used to parse/transform the body of the POST request to a JSON format/usable JS Object..
 const mongoose = require('mongoose'); //imported from NodeJS after installation - used to create connection of the app to the MongoDB.
 
-const saucesRoutes = require('./models/sauces');
-const userRoutes = require('./routes/user');
+const saucesRoutes = require('./routes/sauces.js');
+const userRoutes = require('./routes/user')
 
 //Establishing a connetion to the MongoDB..
 mongoose.connect('mongodb+srv://Callixtusb:VWvJGQtYHDtw5P81@clusters.cc6ym.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
@@ -29,7 +29,8 @@ app.use('/api/auth', userRoutes);  //Est la route (de tout ce qui lie a l'auth.)
 
 
 
-module.exports = app; //To make the app available to other dependent resources, it must be in a state of export..
+
+module.exports = app; //To make the app available to the server. It must be in a state of export..
 
 
 

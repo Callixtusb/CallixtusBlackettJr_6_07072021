@@ -15,4 +15,4 @@ const saucesSchema = mongoose.Schema({  //contains the schema (modele de donnees
   usersDisliked : [{type : String}]
 });
 
-module.exports = mongoose.model('Sauces', saucesSchema);  //To makeavailable to other dependent resources, it must be in a state of export..
+module.exports = mongoose.model('sauces', saucesSchema);  //To makeavailable to other dependent resources, it must be in a state of export..
