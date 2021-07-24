@@ -4,7 +4,7 @@ const fs = require('fs');
 // Checking/contrôle CRUD actions for Sauces and likes & Dislikes - for creation, Update and Delete..
 
 //SAUCESSS
-//Creation of new sauce
+//Creation of new sauce ///////////////////////////////////////////////////////////////////////
 exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce);
     delete sauceObject._id;
@@ -12,13 +12,14 @@ exports.createSauce = (req, res, next) => {
       ...sauceObject,
       imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
-    console.log(sauce)
+    console.log(sauce);
     sauce.save()
+    
       .then(() => res.status(201).json({ message: 'Sauce créée avec succès !' }))
       .catch(error => res.status(400).json({ error }));
   }
   
-  //Update sauce
+  //Update sauce ///////////////////////////////////////////////////////////////////////
   exports.modifySauce = (req, res, next) => {
     const sauceObject = req.file ?
       {
@@ -30,7 +31,7 @@ exports.createSauce = (req, res, next) => {
       .catch(error => res.status(400).json({ error }));
   };
   
-  //Delete sauce
+  //Delete sauce ///////////////////////////////////////////////////////////////////////
   exports.deleteSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
       .then(sauce => {

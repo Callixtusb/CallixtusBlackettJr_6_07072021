@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');         //import of password encryption module
+const bcrypt = require('bcrypt');         //import of password encryption module (hash)
 const jwt = require('jsonwebtoken');      //import of web token generation module
 const User = require('../models/User');   //import of user schema model (model de donnees utilisateur)
 
@@ -6,14 +6,14 @@ const User = require('../models/User');   //import of user schema model (model d
 //Function to signup/create a userrr
 exports.signup = (req, res, next) => {   
     bcrypt.hash(req.body.password, 10)   //Function async used to create and encrypt the password
-    .then(hash => {                      //Response to send to user
+    .then(hash => {                      //Response to send to user (bcrypt)
       const user = new User({            //Creation of the user based on Models UserShema
         email: req.body.email,           //...and including email & password
-        password: hash
+        password: hash                   //... (bcrypt)
       })
       user.save()                        //Method used to save the new user in the DB
-        .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))    //Promise - Response to the use
-        .catch(error => res.status(400).json({ error }));   //Error management message
+        .then(() => res.status(200).json({ message: 'Utilisateur créé !' }))    //Promise - Response to the use
+        .catch(error => res.status(401).json({ error }));   //Error management message
     })
     .catch(error => res.status(500).json({ error }));   //Error management message for an error server.
 };
