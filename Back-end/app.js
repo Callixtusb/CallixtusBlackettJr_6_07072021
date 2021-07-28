@@ -4,9 +4,10 @@ const mongoose = require('mongoose');
 const path = require('path');
 
 const sauceRoutes = require('./routes/sauce');
-const userRoutes = require('./routes/users');
+const userRoutes = require("./routes/users"); // This line crashes my App!!!
 
-mongoose.connect('mongodb+srv://Callixtusb:DXpZikjxLTxnSCfX@cluster0.cc6ym.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+
+mongoose.connect('mongodb+srv://Callixtusb:DXpZikjxLTxnSCfX@cluster0.cc6ym.mongodb.net/users?retryWrites=true&w=majority',
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
@@ -21,7 +22,7 @@ app.use((req, res, next) => {
     next();
   });
 
-app.use(bodyParser.json()); //JSON. methode used to parse/transform the body of the POST request to a JSON format/usable JS Object..
+app.use(bodyParser.json()) //JSON. methode used to parse/transform the body of the POST request to a JSON format/usable JS Object..
 
 app.use('/images', express.static(path.join(__dirname, 'images')));   //gestion des images dans un dossier image statique
 
