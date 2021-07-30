@@ -1,5 +1,3 @@
-// console.log("running Controllers/user.js = OK");
-
 const User = require('../models/user');
 
 const bcrypt = require('bcrypt');
@@ -26,7 +24,7 @@ shemaPassValid
 // SIGN UP CODE
 exports.signup = (req, res, next) => {
   if (!shemaPassValid.validate(req.body.password)) {
-      res.status(401).json({message:"Le mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 chiffre pour un minimum de 8 caractères"});
+      res.status(401).json({message:"L'email exist déjà ET / OU Le mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 chiffre pour un minimum de 8 caractères"});
   } else {
   bcrypt.hash(req.body.password, 10)
   .then(hash => {
