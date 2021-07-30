@@ -1,56 +1,45 @@
 const Sauce = require('../models/sauce');
 const fs = require('fs');
-const xss = require('xss')
+// const xss = require('xss')
 
 /** Contrôle pour ajouter, modifier, mettre à jour et effacer y compris les likes et les dislikes **/
 
-// Middleware display one sauce
-exports.getOneSauce = (req, res, next) => {
-  Sauce.findOne({ _id: req.params.id })
-    .then(sauce => res.status(200).json(sauce))
-    .catch(error => res.status(404).json({ error }));
-};
 
-// Middleware display of all sauces
-exports.getAllSauces = (req, res, next) => {
-  Sauce.find()
-    .then(sauces => res.status(200).json(sauces))
-    .catch(error => res.status(400).json({ error }));
-}
+//Créer une nouvelle sauce /////////////////////////////////////////////////
 
-
-//Créer une nouvelle sauce //////////////////////////////////////////////////
 exports.createSauce = (req, res, next) => {
   const sauceObject = JSON.parse(req.body.sauce);
-  delete req.body._id;
-  const sauce = new Sauce({
-      name: xss(sauceObject.name),
-      manufacturer: xss(sauceObject.manufacturer),
-      description: xss(sauceObject.description),
-      mainPepper: xss(sauceObject.mainPepper),
-      userId: xss(sauceObject.userId),
-      heat: sauceObject.heat,
-      likes:0,
-      dislikes:0,
-      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+  delete sauceObject._id;
+  const sauce = new sauce({
+    ...sauceObject,
+    imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
   });
+
+  console.log(sauce)
+
   sauce.save()
-      .then(() => res.status(201).json({ message: 'Sauce enregistrée !'}))
-      .catch(error => res.status(400).json({ error }));
+    .then(() => res.status(201).json({ message: 'Objet enregistré !' }))
+    .catch(error => res.status(400).json({ error }));
 };
 
-      // exports.createSauce = (req, res, next) => {
-      //   const sauceObject = JSON.parse(req.body.sauce);
-      //   delete sauceObject._id;
-      //   const sauce = new Sauce({
-      //     ...sauceObject,
-      //     imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-      //   });
-      //   console.log(sauce)
-      //   sauce.save()
-      //     .then(() => res.status(201).json({ message: 'Objet enregistré !' }))
-      //     .catch(error => res.status(400).json({ error }));
-      // }
+// exports.createSauce = (req, res, next) => {
+//   const sauceObject = JSON.parse(req.body.sauce);
+//   delete req.body._id;
+//   const sauce = new sauce({
+//       name: xss(sauceObject.name),
+//       manufacturer: xss(sauceObject.manufacturer),
+//       description: xss(sauceObject.description),
+//       mainPepper: xss(sauceObject.mainPepper),
+//       userId: xss(sauceObject.userId),
+//       heat: sauceObject.heat,
+//       likes:0,
+//       dislikes:0,
+//       imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+//   });
+//   sauce.save()
+//       .then(() => res.status(201).json({ message: 'Sauce enregistrée !'}))
+//       .catch(error => res.status(400).json({ error }));
+// };
 
 
 //Modifier une sauce //////////////////////////////////////////////////
@@ -80,6 +69,22 @@ exports.deleteSauce = (req, res, next) => {
     .catch(error => res.status(500).json({ error }));
 };
 
+
+
+
+// Middleware display one sauce
+exports.getOneSauce = (req, res, next) => {
+  Sauce.findOne({ _id: req.params.id })
+    .then(sauce => res.status(200).json({sauce}))
+    .catch(error => res.status(404).json({ error }));
+};
+
+// Middleware display of all sauces
+exports.getAllSauces = (req, res, next) => {
+  Sauce.find()
+    .then(sauces => res.status(200).json(sauces))
+    .catch(error => res.status(400).json({ error }));
+}
 
 
 
