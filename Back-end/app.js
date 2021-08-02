@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');       //..imported from NodeJS after 
 const mongoose = require('mongoose');
 const path = require('path');
 
+const helmet = require("helmet"); //Import de helmet pour la sécurisation contre les injections
+
 const sauceRoutes = require('./routes/sauce');
 const routesOfUsers = require("./routes/users"); 
 
@@ -23,6 +25,9 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
   });
+
+
+app.use(helmet());  //mise en place protection des en-têtes HTTP grâce à Helmet
 
 app.use(bodyParser.json()) //JSON. methode used to parse/transform the body of the POST request to a JSON format/usable JS Object..
 
