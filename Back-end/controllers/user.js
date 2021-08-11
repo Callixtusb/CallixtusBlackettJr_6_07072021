@@ -24,21 +24,20 @@ shemaPassValid
 // SIGN UP CODE
 exports.signup = (req, res, next) => {
 
-//   const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]{2,}\.[a-zA-Z]{2,4}$/;
-  const regexEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+  const regexEmail = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;   // Validation of email format
 
-  if (!regexEmail.test(req.body.email)) {
+  if (!regexEmail.test(req.body.email)) {    
       res.status(401).json({ error: "Rentrez un mail valide" })
       return false
   }  
 
-  const emailHash = hash.sha256().update(req.body.email).digest('hex');
+  const emailHash = hash.sha256().update(req.body.email).digest('hex');   // If email is validated, it is updated and digested to be hex encoded.
 
   if (!shemaPassValid.validate(req.body.password)) {
       res.status(401).json({message:"L'email exist déjà ET / OU Le mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 chiffre pour un minimum de 8 caractères"});
 
   } else {
-    bcrypt.hash(req.body.password, 10)  //hash le mot de passe, on execute 10 fois l algorithme de hachage
+    bcrypt.hash(req.body.password, 10)  //hash le mot de passe, on execute 10 fois l'algorithme de hachage
     .then(hash => {
         const user = new User(
         {    
@@ -74,8 +73,8 @@ exports.signup = (req, res, next) => {
                 res.status(200).json({
                     userId: user._id,
                     token: jwt.sign(   //fonction sign prend en argument
-                        { userId: user._id },   //1 argument : les données que l on veut encoder à l int de ce token
-                        'RANDOM_TOKEN_SECRET',   // 2ieme argument : clef secrete de l encodage 
+                        { userId: user._id },   // UserId est encode, creant le token (1 argument : les données que l on veut encoder à l int de ce token)
+                        'RANDOM_TOKEN_SECRET',   // Creation du token... (2eme argument : clef secrete de l encodage )
                         { expiresIn: '24h'}   // chq TOKEN dure 24h 
                     )
                 });
@@ -84,3 +83,7 @@ exports.signup = (req, res, next) => {
         })
         .catch(error => res.status(500).json({ error }));
 };
+
+
+
+//   const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]{2,}\.[a-zA-Z]{2,4}$/;
